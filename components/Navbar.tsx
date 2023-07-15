@@ -1,36 +1,39 @@
-import { NavLinks } from '@/constant';
 import Image from 'next/image';
 import Link from 'next/link';
-import AuthProviders from './AuthProviders';
 
-const Navbar = () => {
-    const session = {};
+import { NavLinks } from '@/constant';
+import { getCurrentUser } from '@/lib/session';
+
+import AuthProviders from './AuthProviders';
+import Button from './Button';
+import ProfileMenu from './ProfileMenu';
+
+const Navbar = async () => {
+    const session = await getCurrentUser();
+
     return (
-        <nav className="flexbetween navbar">
-            <div className="flex-1 flexstart gap-10 ">
+        <nav className="flexBetween navbar">
+            <div className="flex-1 flexStart gap-10">
                 <Link href="/">
-                    <Image
-                        src="/logo.svg"
-                        alt="Flexibble"
-                        width={115}
-                        height={43}
-                    />
+                    <Image src="/logo.svg" width={116} height={43} alt="logo" />
                 </Link>
-                <ul className="xl:flex hidden text-sm gap-7">
+                <ul className="xl:flex hidden text-small gap-7">
                     {NavLinks.map((link) => (
-                        <li key={link.key}>
-                            <Link href={link.href} key={link.key}>
-                                {link.text}
-                            </Link>
-                        </li>
+                        <Link href={link.href} key={link.text}>
+                            {link.text}
+                        </Link>
                     ))}
                 </ul>
             </div>
+
             <div className="flexCenter gap-4">
-                {session ? (
+                {session?.user ? (
                     <>
-                        UserPhoto
-                        <Link href="/create-project">Share Work</Link>
+                        <ProfileMenu session={session} />
+
+                        <Link href="/create-project">
+                            <Button title="Share work" />
+                        </Link>
                     </>
                 ) : (
                     <AuthProviders />
@@ -39,4 +42,5 @@ const Navbar = () => {
         </nav>
     );
 };
+
 export default Navbar;
