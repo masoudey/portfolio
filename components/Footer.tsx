@@ -29,7 +29,7 @@ const Footer = () => {
                         src="/logo.svg"
                         width={115}
                         height={38}
-                        alt="Flexibble"
+                        alt="Portfolio"
                     />
                     <p className="text-start text-sm font-normal mt-5 max-w-xs">
                         Flexibble is dfkjgdlkfgdfxc ;sdfks;odfs swfks;oep
