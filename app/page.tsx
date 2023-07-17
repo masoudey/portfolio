@@ -5,7 +5,7 @@ import ProjectCard from '@/components/ProjectCard';
 import { fetchAllProjects } from '@/lib/actions';
 
 type SearchParams = {
-    category?: string | null;
+    category?: string | '';
     endcursor?: string | null;
 };
 
