@@ -4,8 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-    title: 'FlexibBle',
-    description: 'Showcase rem,markable developer project',
+    title: 'Portfolio',
+    description: 'Showcase remarkable developer project',
 };
 
 export default function RootLayout({
