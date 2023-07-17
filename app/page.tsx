@@ -33,7 +33,6 @@ const Home = async ({ searchParams: { category, endcursor } }: Props) => {
     const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
 
     const projectsToDisplay = data?.projectSearch?.edges || [];
-    // console.log(data);
 
     if (projectsToDisplay.length === 0) {
         return (
