@@ -63,12 +63,13 @@ export const fetchAllProjects = (
 ) => {
     client.setHeader('x-api-key', apiKey);
 
-    const variables = category
-        ? {
-              endcursor,
-              category,
-          }
-        : { endcursor };
+    const variables =
+        category && endcursor
+            ? {
+                  endcursor,
+                  category,
+              }
+            : {};
     console.log('var:', variables);
     return makeGraphQLRequest(projectsQuery, variables);
 };
