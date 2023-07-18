@@ -29,9 +29,7 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 export const revalidate = 0;
 
-const Home = async ({
-    searchParams: { category = null, endcursor },
-}: Props) => {
+const Home = async ({ searchParams: { category, endcursor } }: Props) => {
     const data = (await fetchAllProjects(category, endcursor)) as ProjectSearch;
     console.log('category', category);
     console.log(data);
