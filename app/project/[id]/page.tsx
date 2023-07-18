@@ -1,25 +1,24 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image"
+import Link from "next/link"
 
-import { getCurrentUser } from '@/lib/session';
-import { getProjectDetails } from '@/lib/actions';
-import Modal from '@/components/Modal';
-import ProjectActions from '@/components/ProjectActions';
-import RelatedProjects from '@/components/RelatedProjects';
-import { ProjectInterface } from '@/common.types';
+import { getCurrentUser } from "@/lib/session"
+import { getProjectDetails } from "@/lib/actions"
+import Modal from "@/components/Modal"
+import ProjectActions from "@/components/ProjectActions"
+import RelatedProjects from "@/components/RelatedProjects"
+import { ProjectInterface } from "@/common.types"
 
 const Project = async ({ params: { id } }: { params: { id: string } }) => {
-    const session = await getCurrentUser();
-    const result = (await getProjectDetails(id)) as {
-        project?: ProjectInterface;
-    };
+    const session = await getCurrentUser()
+    const result = await getProjectDetails(id) as { project?: ProjectInterface}
 
-    if (!result?.project)
-        return <p className="no-result-text">Failed to fetch project info</p>;
+    if (!result?.project) return (
+        <p className="no-result-text">Failed to fetch project info</p>
+    )
 
-    const projectDetails = result?.project;
+    const projectDetails = result?.project
 
-    const renderLink = () => `/profile/${projectDetails?.createdBy?.id}`;
+    const renderLink = () => `/profile/${projectDetails?.createdBy?.id}`
 
     return (
         <Modal>
@@ -43,16 +42,8 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                             <Link href={renderLink()}>
                                 {projectDetails?.createdBy?.name}
                             </Link>
-                            <Image
-                                src="/dot.svg"
-                                width={4}
-                                height={4}
-                                alt="dot"
-                            />
-                            <Link
-                                href={`/?category=${projectDetails.category}`}
-                                className="text-primary-purple font-semibold"
-                            >
+                            <Image src="/dot.svg" width={4} height={4} alt="dot" />
+                            <Link href={`/?category=${projectDetails.category}`} className="text-primary-purple font-semibold"> 
                                 {projectDetails?.category}
                             </Link>
                         </div>
@@ -82,26 +73,16 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                 </p>
 
                 <div className="flex flex-wrap mt-5 gap-5">
-                    <Link
-                        href={projectDetails?.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flexCenter gap-2 tex-sm font-medium text-primary-purple"
-                    >
-                        🖥 <span className="underline">Github</span>
+                    <Link href={projectDetails?.githubUrl} target="_blank" rel="noreferrer" className="flexCenter gap-2 tex-sm font-medium text-primary-purple">
+                        🖥 <span className="underline">Github</span> 
                     </Link>
                     <Image src="/dot.svg" width={4} height={4} alt="dot" />
-                    <Link
-                        href={projectDetails?.liveSiteUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flexCenter gap-2 tex-sm font-medium text-primary-purple"
-                    >
-                        🚀 <span className="underline">Live Site</span>
+                    <Link href={projectDetails?.liveSiteUrl} target="_blank" rel="noreferrer" className="flexCenter gap-2 tex-sm font-medium text-primary-purple">
+                        🚀 <span className="underline">Live Site</span> 
                     </Link>
                 </div>
             </section>
-
+      
             <section className="flexCenter w-full gap-8 mt-28">
                 <span className="w-full h-0.5 bg-light-white-200" />
                 <Link href={renderLink()} className="min-w-[82px] h-[82px]">
@@ -116,12 +97,9 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                 <span className="w-full h-0.5 bg-light-white-200" />
             </section>
 
-            <RelatedProjects
-                userId={projectDetails?.createdBy?.id}
-                projectId={projectDetails?.id}
-            />
+            <RelatedProjects userId={projectDetails?.createdBy?.id} projectId={projectDetails?.id} />
         </Modal>
-    );
-};
+    )
+}
 
-export default Project;
+export default Project

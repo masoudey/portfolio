@@ -1,12 +1,12 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { signOut } from 'next-auth/react';
-import { Fragment, useState } from 'react';
-import { Menu, Transition } from '@headlessui/react';
+import Link from "next/link";
+import Image from "next/image";
+import { signOut } from "next-auth/react";
+import { Fragment, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
 
-import { SessionInterface } from '@/common.types';
+import { SessionInterface } from "@/common.types";
 
 const ProfileMenu = ({ session }: { session: SessionInterface }) => {
     const [openModal, setOpenModal] = useState(false);
@@ -14,10 +14,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
     return (
         <div className="flexCenter z-10 flex-col relative">
             <Menu as="div">
-                <Menu.Button
-                    className="flexCenter"
-                    onMouseEnter={() => setOpenModal(true)}
-                >
+                <Menu.Button className="flexCenter" onMouseEnter={() => setOpenModal(true)} >
                     {session?.user?.image && (
                         <Image
                             src={session.user.image}
@@ -54,44 +51,23 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                                     alt="profile Image"
                                 />
                             )}
-                            <p className="font-semibold">
-                                {session?.user?.name}
-                            </p>
+                            <p className="font-semibold">{session?.user?.name}</p>
                         </div>
 
                         <div className="flex flex-col gap-3 pt-10 items-start w-full">
                             <Menu.Item>
-                                <Link
-                                    href={`/profile/${session?.user?.id}`}
-                                    className="text-sm"
-                                >
-                                    Work Preferences
-                                </Link>
+                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Work Preferences</Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link
-                                    href={`/profile/${session?.user?.id}`}
-                                    className="text-sm"
-                                >
-                                    Settings
-                                </Link>
+                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Settings</Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link
-                                    href={`/profile/${session?.user?.id}`}
-                                    className="text-sm"
-                                >
-                                    Profile
-                                </Link>
+                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Profile</Link>
                             </Menu.Item>
                         </div>
                         <div className="w-full flexStart border-t border-nav-border mt-5 pt-5">
                             <Menu.Item>
-                                <button
-                                    type="button"
-                                    className="text-sm"
-                                    onClick={() => signOut()}
-                                >
+                                <button type="button" className="text-sm" onClick={() => signOut()}> 
                                     Sign out
                                 </button>
                             </Menu.Item>
@@ -100,7 +76,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                 </Transition>
             </Menu>
         </div>
-    );
-};
+    )
+}
 
-export default ProfileMenu;
+export default ProfileMenu
