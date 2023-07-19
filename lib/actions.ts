@@ -63,10 +63,11 @@ export const fetchAllProjects = (
     client.setHeader('x-api-key', apiKey);
 
     const variebles = {
-        filter: { category: category },
+        endcursor,
+        category: { category: { eq: category } },
     };
 
-    return makeGraphQLRequest(projectsQuery, { category, endcursor });
+    return makeGraphQLRequest(projectsQuery, variebles);
 };
 
 export const createNewProject = async (
